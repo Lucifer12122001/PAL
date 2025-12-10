@@ -1,7 +1,7 @@
 ﻿import requests
 import sys
 import os
-import time
+import subprocess
 
 
 MAIN_SCRIPT_NAME = "pal_assistant_final.py"
@@ -9,7 +9,7 @@ MAIN_SCRIPT_NAME = "pal_assistant_final.py"
 
 # !!! ACTION REQUIRED: This URL MUST point to the raw, latest version of your code !!!
 # Example: a direct link to the raw content of your GitHub Gist or repository file.
-UPDATE_URL = "https://example.com/raw/latest/pal_assistant_final.py" 
+UPDATE_URL = "https://raw.githubusercontent.com/Lucifer12122001/PAL/refs/heads/main/pal_assistant_final.py" 
 
 
 def perform_update():
@@ -55,3 +55,4 @@ if __name__ == '__main__':
     else:
 
         sys.exit(1)
+
