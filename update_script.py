@@ -41,14 +41,11 @@ def perform_update():
 
 
 def restart_pal():
-    """Stops the current process and executes a new process."""
-    print(f"[{MAIN_SCRIPT_NAME}]: Stopping current P.A.L. instance...")
-    time.sleep(2) # Wait briefly to ensure file is closed/flushed
-    
-    # os.execl replaces the current process with a new one, inheriting the arguments (sys.argv)
-    # This is the cleanest way to restart a Python script.
-    os.execl(sys.executable, sys.executable, *sys.argv)
-    
+    """Stops the current process and executes a new process using subprocess (best for windows compatibility)."""
+    print(f"[{MAIN_SCRIPT_NAME}]: Initiating clean restart process...")
+    command = [sys.executable, os.path.join(os.getcwd(), pal_assistant_final.py)]
+    subprocess.Popen(command)
+    print(f"[{MAIN_SCRIPT_NAME}]: New process launched. Exiting old process...")sys.exit(0)
     # Execution stops here, and the new process starts.
 
 
@@ -56,4 +53,5 @@ if __name__ == '__main__':
     if perform_update():
         restart_pal()
     else:
+
         sys.exit(1)
