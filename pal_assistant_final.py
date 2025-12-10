@@ -312,27 +312,33 @@ def handle_command():
 # --- 5. STARTUP PROCEDURE ---
 
 
-def startup_procedure():
-    """Handles interactive device selection and the security handshake."""
-    global IS_AUTHENTICATED, DEVICE_TYPE
+91% of storage used … If you run out, you can't create, edit, and upload files. Share 100 GB of storage with your family members for ₹59 for 3 months ₹130.
 
+def startup_procedure():
+    global IS_AUTHENTICATED, DEVICE_TYPE
 
     # A. Device Type Selection
     while DEVICE_TYPE not in ['MOBILE', 'LAPTOP']:
-        user_choice = input("P.A.L.: Is this instance running on a [Mobile] or [Laptop]? ").strip().upper()
+        # CHANGE: Use sys.stdin.readline() for robust console input
+        print("P.A.L.: Is this instance running on a [Mobile] or [Laptop]? ", end='')
+        sys.stdout.flush()
+        user_choice = sys.stdin.readline().strip().upper() 
+
         if user_choice in ['MOBILE', 'LAPTOP']:
             DEVICE_TYPE = user_choice
         else:
             print("P.A.L.: Invalid input. Please type 'Mobile' or 'Laptop'.")
 
-
     print(f"\nP.A.L.: Device Type set to {DEVICE_TYPE}. Initiating Security Check.")
 
-
-    # B. Security Handshake (also initializes the DB if successful)
+    # B. Security Handshake
     while not IS_AUTHENTICATED:
-        user_input = input(f"P.A.L.: What was your Secret Name? ")
-        if user_input.strip().upper() == SECRET_NAME:
+        # CHANGE: Use sys.stdin.readline() here too
+        print(f"P.A.L.: What was your Secret Name? ", end='')
+        sys.stdout.flush()
+        user_input = sys.stdin.readline().strip().upper()
+
+        if user_input == SECRET_NAME:
             IS_AUTHENTICATED = True
             initialize_database()
             print("\nP.A.L.: Access Granted. Welcome, Master. Starting API.")
@@ -340,9 +346,9 @@ def startup_procedure():
             conditional_alert()
             print("P.A.L.: Security failure. Please try again.")
 
-
 if __name__ == "__main__":
     startup_procedure()
     if IS_AUTHENTICATED:
         print(f"\n* Starting P.A.L. API using Waitress on http://127.0.0.1:8080/ *")
+
         serve(app, host='0.0.0.0', port=8080)
