@@ -45,7 +45,8 @@ def restart_pal():
     print(f"[{MAIN_SCRIPT_NAME}]: Initiating clean restart process...")
     command = [sys.executable, os.path.join(os.getcwd(), pal_assistant_final.py)]
     subprocess.Popen(command)
-    print(f"[{MAIN_SCRIPT_NAME}]: New process launched. Exiting old process...")sys.exit(0)
+    print(f"[{MAIN_SCRIPT_NAME}]: New process launched. Exiting old process...")
+    sys.exit(0)
     # Execution stops here, and the new process starts.
 
 
@@ -55,4 +56,5 @@ if __name__ == '__main__':
     else:
 
         sys.exit(1)
+
 
