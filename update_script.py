@@ -43,7 +43,7 @@ def perform_update():
 def restart_pal():
     """Stops the current process and executes a new process using subprocess (best for windows compatibility)."""
     print(f"[{MAIN_SCRIPT_NAME}]: Initiating clean restart process...")
-    command = [sys.executable, os.path.join(os.getcwd(), pal_assistant_final.py)]
+    command = [sys.executable, os.path.join(os.getcwd(), MAIN_SCRIPT_NAME)]
     subprocess.Popen(command)
     print(f"[{MAIN_SCRIPT_NAME}]: New process launched. Exiting old process...")
     sys.exit(0)
@@ -56,5 +56,6 @@ if __name__ == '__main__':
     else:
 
         sys.exit(1)
+
 
 
